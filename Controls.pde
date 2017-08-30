@@ -7,6 +7,8 @@ void keyPressed() {
     result = getRhyme(message);
     message = "";
   } else if (keyCode != SHIFT && keyCode != CONTROL && keyCode != ALT) {
-    message = message + key;
+    if (key != '\'' && key != '\"' && key !=',' && key != '.' && key != '?' && key != '!') {
+      message = message + key;
+    }
   }
 }
