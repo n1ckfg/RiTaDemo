@@ -1,4 +1,5 @@
 import rita.*;
+import guru.ttslib.*;
 
 String message = "";
 String result = "";
@@ -6,6 +7,7 @@ PFont font;
 int fontSize = 28;
 ArrayList<String> wordsUsed;
 RiLexicon lexicon;
+TTS tts;
 
 void setupRiTa() {
   font = createFont("Arial", fontSize);
@@ -13,10 +15,11 @@ void setupRiTa() {
   textAlign(CENTER, CENTER);
   wordsUsed = new ArrayList<String>();
   lexicon = new RiLexicon();
+  tts = new TTS();
 }
 
 void drawRiTa() {
-  if (result.equals("[ no rhyme ]")) {
+  if (result.equals("no rhyme")) {
     fill(255, 127, 0);
   } else {
     fill(0, 127, 255);
@@ -41,7 +44,11 @@ String getRhyme(String message) {
     wordsUsed = new ArrayList<String>();
     returns = results[0];
   }
-  if (returns.equals("")) returns = "[ no rhyme ]";
+  if (returns.equals("")) returns = "no rhyme";
+  tts.setPitchShift(1.5);
+  tts.speak(message);  
+  tts.setPitchShift(0.5);
+  tts.speak(returns);
   return returns;
 }
 
